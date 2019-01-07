@@ -1,0 +1,30 @@
+{
+  "name": "statemgr",
+  "version": "1.0.1",
+  "author": {
+    "name": "Teddy Gandon"
+  },
+  "description": "Just a simple state manager",
+  "keywords": [
+    "state",
+    "manager"
+  ],
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TeddyGandon/statemgr"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "rollup": "^1.0.2",
+    "rollup-plugin-babel": "^4.2.0",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.0"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "dependencies": {
+    "obsrvble": "^1.1.4"
+  }
+}
