@@ -13,6 +13,7 @@ export class Statemgr extends Observable {
   constructor() {
     super();
     this._state = {};
+    this._reducer = null;
   }
 
   /**
@@ -42,6 +43,17 @@ export class Statemgr extends Observable {
    */
   get(property) {
     return this._state[property];
+  }
+
+  setReducer(dispatcher) {
+    this._reducer = dispatcher;
+  }
+
+  reduce(...params) {
+    this._reducer(
+      params,
+      this.set.bind(this)
+    );
   }
 
 }

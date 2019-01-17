@@ -19,6 +19,14 @@ Stores a property into the state manager
 `get(property)`
 Returns a stored property
 
+### setReducer
+`setReducer(dispatcher)`
+Set a reducer (a method that will be called for complex set). The reducer will be called with 2 arguments: the parameters passed to the reducer call & the `set` method of the state manager.
+
+### reduce
+`reduce(...params)`
+Call the reducer.
+
 # Example
 
 Set & get a value:
@@ -34,13 +42,39 @@ Subscribe to some changes:
 import Statemgr from "statemgr";
 import {Observer} from "obsrvble";
 
-const foo = new Foo();
-foo.subscribe(new Observer(
+Statemgr.subscribe(new Observer(
     'foo',
     params => {
         // Do something here
-        console.log(params[0]); // hello!
+        console.log(params[0]); // bar
     }
 ));
 Statemgr.set('foo', 'bar');
+```
+Call the reducer:
+```js
+import Statemgr from "statemgr";
+import {Observer} from "obsrvble";
+
+Statemgr.subscribe(new Observer(
+    'total',
+    params => {
+        // Do something here
+        console.log(params[0]);
+    }
+));
+
+Statemgr.set('total', 0);
+Statemgr.setReducer((params, set) => {
+    if (params[0] === 'add') {
+        set('total', Statemgr.get('total') + 1);
+    }
+    if (params[0] === 'sub') {
+        set('total', Statemgr.get('total') - 1);
+    }
+});
+
+Statemgr.reduce('add'); //1
+Statemgr.reduce('add'); //2
+Statemgr.reduce('sub'); //1
 ```
